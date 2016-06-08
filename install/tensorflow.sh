@@ -2,8 +2,8 @@
 
 set -o pipefail
 
-BAZEL_VERSION=tags/0.2.2
-TENSORFLOW_VERSION=v0.8.0rc0
+BAZEL_VERSION=tags/0.2.3
+TENSORFLOW_VERSION=v0.9.0rc0
 
 # set up a big tmp space and a permanent tensorflow space
 sudo mkdir -p -m 1777 /mnt/tmp /tensorflow
@@ -49,7 +49,7 @@ GCC_HOST_COMPILER_PATH=/usr/bin/gcc PYTHON_BIN_PATH=/usr/local/bin/python \
     ./configure
 bazel build -c opt --config=cuda //tensorflow/tools/pip_package:build_pip_package
 bazel-bin/tensorflow/tools/pip_package/build_pip_package /tmp/tensorflow_pkg
-sudo /usr/local/bin/pip install /tmp/tensorflow_pkg/tensorflow-0.8.0rc0-py3-none-any.whl
+sudo /usr/local/bin/pip install /tmp/tensorflow_pkg/tensorflow-${TENSORFLOW_VERSION#v}-py3-none-any.whl
 
 # build retrainer
 bazel build -c opt --copt=-mavx tensorflow/examples/image_retraining:retrain
