@@ -50,16 +50,9 @@ sudo /usr/local/bin/pip install jupyter notebook jupyterhub keras pandas six clo
 sudo npm install -g configurable-http-proxy
 ipcluster nbextension enable
 
-openssl req \
-    -new \
-    -newkey ec
-    -pkeyopt ec_paramgen_curve:prime256v1
-    -days 365 \
-    -nodes \
-    -x509 \
-    -subj "/C=US/ST=Denial/L=Springfield/O=Dis/CN=cortex.lmig.com" \
-    -keyout mykey.key \
-    -out mycert.pem
+openssl ecparam -genkey -name prime256v1 -out mykey.key
+openssl req -new -key mykey.key -out csr.pem -subj "/C=US/ST=Denial/L=Springfield/O=Dis/CN=cortex.lmig.com"
+openssl req -x509 -days 365 -key mykey.key -in csr.pem -out mycert.pem
 
 sudo adduser --password watson cortex
 sudo echo "sudo jupyterhub --port 443 --ssl-key /tensorflow/mykey.key --ssl-cert /tensorflow/mycert.pem" > /etc/init.d/jupyterhub
