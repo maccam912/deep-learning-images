@@ -49,7 +49,7 @@ sudo /usr/local/bin/pip install https://storage.googleapis.com/tensorflow/linux/
 sudo /usr/local/bin/pip install jupyter notebook jupyterhub keras pandas six cloudpickle numpy scikit-learn xgboost xgbmagic luigi ipyparallel
 sudo npm install -g configurable-http-proxy
 ipcluster nbextension enable
-openssl req -x509 -newkey rsa:2048 -keyout key.pem -out cert.pem -days 365
+openssl req -x509 -nodes -days 365 -newkey rsa:1024 -keyout mykey.key -out mycert.pem
 sudo adduser --password watson cortex
 sudo echo "sudo jupyterhub --port 443 --ssl-key /tensorflow/key.pem --ssl-cert /tensorflow/cert.pem" > /etc/init.d/jupyterhub
 sudo chmod ugo+x /etc/init.d/jupyterhub
