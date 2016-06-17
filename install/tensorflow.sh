@@ -10,7 +10,7 @@ sudo mkdir -p -m 1777 /mnt/tmp /tensorflow
 
 # install global deps
 sudo apt-get update
-sudo apt-get install -y build-essential git swig zip zlib1g-dev npm nodejs-legacy
+sudo apt-get install -y build-essential git swig zip zlib1g-dev npm nodejs-legacy curl
 
 # install bazel deps
 sudo apt-get install -y software-properties-common  # for add-apt-repository
@@ -35,7 +35,7 @@ pushd /mnt/tmp
 curl -o Anaconda3-4.0.0-Linux-x86_64.sh -L http://repo.continuum.io/archive/Anaconda3-4.0.0-Linux-x86_64.sh
 echo "36a558a1109868661a5735f5f32607643f6dc05cf581fefb1c10fb8abbe22f39 Anaconda3-4.0.0-Linux-x86_64.sh" | sha256sum -c -
 sudo bash -c 'bash Anaconda3-4.0.0-Linux-x86_64.sh -b -f -p /usr/local'
-sudo /usr/local/bin/conda install -y anaconda python=3.5
+sudo /usr/local/bin/conda install -y anaconda python=3.4
 sudo /usr/local/bin/conda install -y pip
 popd
 
@@ -46,10 +46,12 @@ pushd /tensorflow
 #bazel-bin/tensorflow/tools/pip_package/build_pip_package /tmp/tensorflow_pkg
 #sudo /usr/local/bin/pip install /tmp/tensorflow_pkg/tensorflow-0.8.0-py3-none-any.whl
 sudo /usr/local/bin/pip install https://storage.googleapis.com/tensorflow/linux/cpu/tensorflow-0.9.0rc0-cp34-cp34m-linux_x86_64.whl
-sudo /usr/local/bin/pip install jupyter notebook jupyterhub
+sudo /usr/local/bin/pip install jupyter notebook jupyterhub keras pandas numpy scikit-learn xgboost xgbmagic ipyparallel
+sudo npm install -g configurable-http-proxy
+ipcluster nbextension enable
 
-jupyterhub &
+#jupyterhub &
 
 # build retrainer
-bazel build -c opt --copt=-mavx tensorflow/examples/image_retraining:retrain
+#bazel build -c opt --copt=-mavx tensorflow/examples/image_retraining:retrain
 popd
