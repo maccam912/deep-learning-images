@@ -1,6 +1,6 @@
 {
     "variables": {
-	"base_ami": null
+	"base_ami": "ami-415f6d2b"
     },
     "builders": [
 	{
