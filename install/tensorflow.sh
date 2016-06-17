@@ -46,7 +46,7 @@ pushd /tensorflow
 #bazel-bin/tensorflow/tools/pip_package/build_pip_package /tmp/tensorflow_pkg
 #sudo /usr/local/bin/pip install /tmp/tensorflow_pkg/tensorflow-0.8.0-py3-none-any.whl
 sudo /usr/local/bin/pip install https://storage.googleapis.com/tensorflow/linux/cpu/tensorflow-0.9.0rc0-cp34-cp34m-linux_x86_64.whl
-sudo /usr/local/bin/pip install jupyter notebook jupyterhub keras pandas numpy scikit-learn xgboost xgbmagic ipyparallel
+sudo /usr/local/bin/pip install jupyter notebook jupyterhub keras pandas numpy scikit-learn xgboost xgbmagic luigi ipyparallel
 sudo npm install -g configurable-http-proxy
 ipcluster nbextension enable
 
