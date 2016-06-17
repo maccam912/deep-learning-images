@@ -3,14 +3,14 @@
 set -o pipefail
 
 BAZEL_VERSION=tags/0.2.2
-TENSORFLOW_VERSION=v0.8.0rc0
+TENSORFLOW_VERSION=v0.9.0rc0
 
 # set up a big tmp space and a permanent tensorflow space
 sudo mkdir -p -m 1777 /mnt/tmp /tensorflow
 
 # install global deps
 sudo apt-get update
-sudo apt-get install -y build-essential git swig zip zlib1g-dev
+sudo apt-get install -y build-essential git swig zip zlib1g-dev python3-pip python3 python3-devel npm nodejs-legacy
 
 # install bazel deps
 sudo apt-get install -y software-properties-common  # for add-apt-repository
@@ -21,14 +21,14 @@ sudo update-alternatives --config java
 sudo update-alternatives --config javac
 
 # install bazel
-pushd /mnt/tmp
-git clone https://github.com/bazelbuild/bazel.git
-pushd bazel
-git checkout $BAZEL_VERSION
-./compile.sh
-sudo cp output/bazel /usr/bin
-popd
-popd
+#pushd /mnt/tmp
+#git clone https://github.com/bazelbuild/bazel.git
+#pushd bazel
+#git checkout $BAZEL_VERSION
+#./compile.sh
+#sudo cp output/bazel /usr/bin
+#popd
+#popd
 
 # install anaconda python 3.5
 pushd /mnt/tmp
@@ -41,15 +41,14 @@ popd
 
 # install tensorflow
 pushd /tensorflow
-git clone -b $TENSORFLOW_VERSION --recurse-submodules https://github.com/tensorflow/tensorflow .
-GCC_HOST_COMPILER_PATH=/usr/bin/gcc PYTHON_BIN_PATH=/usr/local/bin/python \
-    CUDA_TOOLKIT_PATH=/usr/local/cuda CUDNN_INSTALL_PATH=/usr/local/cuda \
-    TF_NEED_CUDA=1 TF_CUDA_VERSION=7.5 TF_CUDNN_VERSION=4 \
-    TF_CUDA_COMPUTE_CAPABILITIES=3.0 TF_UNOFFICIAL_SETTING=1 \
-    ./configure
-bazel build -c opt --config=cuda //tensorflow/tools/pip_package:build_pip_package
-bazel-bin/tensorflow/tools/pip_package/build_pip_package /tmp/tensorflow_pkg
-sudo /usr/local/bin/pip install /tmp/tensorflow_pkg/tensorflow-0.8.0rc0-py3-none-any.whl
+#git clone -b $TENSORFLOW_VERSION --recurse-submodules https://github.com/tensorflow/tensorflow .
+#bazel build //tensorflow/tools/pip_package:build_pip_package
+#bazel-bin/tensorflow/tools/pip_package/build_pip_package /tmp/tensorflow_pkg
+#sudo /usr/local/bin/pip install /tmp/tensorflow_pkg/tensorflow-0.8.0-py3-none-any.whl
+sudo /usr/local/bin/pip install https://storage.googleapis.com/tensorflow/linux/cpu/tensorflow-0.9.0rc0-cp34-cp34m-linux_x86_64.whl
+sudo /usr/local/bin/pip install jupyter notebook jupyterhub
+
+jupyterhub &
 
 # build retrainer
 bazel build -c opt --copt=-mavx tensorflow/examples/image_retraining:retrain
