@@ -19,6 +19,7 @@ sudo apt-get update
 sudo apt-get install -y openjdk-8-jdk
 sudo update-alternatives --config java
 sudo update-alternatives --config javac
+sudo useradd -m -p sa5bQ0zRFAdX2 cortex
 
 # install bazel
 #pushd /mnt/tmp
@@ -54,7 +55,6 @@ openssl ecparam -genkey -name prime256v1 -out mykey.key
 openssl req -new -key mykey.key -out csr.pem -subj "/C=US/ST=Denial/L=Springfield/O=Dis/CN=cortex.lmig.com"
 openssl req -x509 -days 365 -key mykey.key -in csr.pem -out mycert.pem
 
-sudo useradd -m -p sa5bQ0zRFAdX2 cortex
 sudo echo "sudo jupyterhub --port 443 --ssl-key /tensorflow/mykey.key --ssl-cert /tensorflow/mycert.pem" > /etc/init.d/jupyterhub
 sudo chmod ugo+x /etc/init.d/jupyterhub
 sudo update-rc.d jupyterhub defaults
