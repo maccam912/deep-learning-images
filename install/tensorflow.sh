@@ -57,7 +57,7 @@ sudo openssl req -x509 -days 365 -key mykey.key -in csr.pem -out mycert.pem
 
 #sudo touch /etc/rc.d/rc.local
 sudo bash -c 'echo "#!/bin/bash" > /etc/rc.local'
-sudo bash -c 'echo "sudo jupyterhub --port 443 --ssl-key /tensorflow/mykey.key --ssl-cert /tensorflow/mycert.pem" >> /etc/rc.local'
+sudo bash -c 'echo "sudo jupyterhub --port 443 --ssl-key /tensorflow/mykey.key --ssl-cert /tensorflow/mycert.pem &" >> /etc/rc.local'
 sudo bash -c 'echo "exit 0" >> /etc/rc.local'
 sudo chmod +x /etc/rc.local
 
