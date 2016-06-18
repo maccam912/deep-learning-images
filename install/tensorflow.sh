@@ -57,7 +57,9 @@ sudo openssl req -x509 -days 365 -key mykey.key -in csr.pem -out mycert.pem
 
 #sudo touch /etc/rc.d/rc.local
 
-sudo echo "sudo jupyterhub --port 443 --ssl-key /tensorflow/mykey.key --ssl-cert /tensorflow/mycert.pem" > /etc/rc.local
+echo "#!/bin/bash\nsudo jupyterhub --port 443 --ssl-key /tensorflow/mykey.key --ssl-cert /tensorflow/mycert.pem" > /tensorflow/startup.sh
+chmod +x /tensorflow/startup.sh
+ln -s /tensorflow/startup.sh /etc/rc5.d/S99jupyterhub.sh
 
 #jupyterhub &
 
