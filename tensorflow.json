@@ -32,6 +32,6 @@
   	    "type": "file",
   	    "source": "install/newWorker.py",
   	    "destination": "/tensorflow/newWorker.py"
-	},
+	}
     ]
 }
