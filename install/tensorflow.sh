@@ -59,7 +59,7 @@ sudo openssl req -x509 -days 365 -key mykey.key -in csr.pem -out mycert.pem
 #sudo touch /etc/rc.d/rc.local
 sudo bash -c 'echo "#!/bin/bash" > /etc/rc.local'
 sudo bash -c 'echo "sudo jupyterhub --port 443 --ssl-key /tensorflow/mykey.key --ssl-cert /tensorflow/mycert.pem &" >> /etc/rc.local'
-sudo bash -c 'echo "python /tensorflow/newWorker.py http://52.73.142.202:8082/ &" >> /etc/rc.local'
+sudo bash -c 'echo "SCHEDULER_HOST=http://52.73.142.202:8082/ python /tensorflow/newWorker.py &" >> /etc/rc.local'
 sudo bash -c 'echo "exit 0" >> /etc/rc.local'
 sudo chmod +x /etc/rc.local
 
