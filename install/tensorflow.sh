@@ -10,7 +10,7 @@ sudo mkdir -p -m 1777 /mnt/tmp /tensorflow
 
 # install global deps
 sudo apt-get update
-sudo apt-get install -y build-essential git swig zip zlib1g-dev npm nodejs-legacy curl
+sudo apt-get install -y build-essential git swig zip zlib1g-dev npm nodejs-legacy curl htop
 
 # install bazel deps
 sudo apt-get install -y software-properties-common  # for add-apt-repository
