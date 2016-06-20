@@ -18,8 +18,8 @@ worker = luigi.worker.Worker(scheduler=sch)
 
 
 # In[44]:
-
+worker.run()
 while True:
-    worker.run()
+    sch.get_work()
     time.sleep(5)
 
