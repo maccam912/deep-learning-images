@@ -24,14 +24,14 @@
 	}
     ],
     "provisioners": [
-    	{
+	{
+	    "script": "install/tensorflow.sh",
+	    "type": "shell"
+	},
+	{
   	    "type": "file",
   	    "source": "install/newWorker.py",
   	    "destination": "/tensorflow/newWorker.py"
 	},
-	{
-	    "script": "install/tensorflow.sh",
-	    "type": "shell"
-	}
     ]
 }
