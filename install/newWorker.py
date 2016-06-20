@@ -5,13 +5,12 @@
 
 import luigi
 import time
-import sys
+import os
 
 
 # In[36]:
 
-sch = luigi.RemoteScheduler(url=str(sys.argv[0]))
-
+sch = luigi.RemoteScheduler(url=os.environ.get('SCHEDULER_HOST'))
 
 # In[39]:
 
