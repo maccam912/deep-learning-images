@@ -47,7 +47,7 @@ pushd /tensorflow
 #bazel-bin/tensorflow/tools/pip_package/build_pip_package /tmp/tensorflow_pkg
 #sudo /usr/local/bin/pip install /tmp/tensorflow_pkg/tensorflow-0.8.0-py3-none-any.whl
 sudo /usr/local/bin/pip install https://storage.googleapis.com/tensorflow/linux/cpu/tensorflow-0.9.0rc0-cp34-cp34m-linux_x86_64.whl
-sudo /usr/local/bin/pip install jupyter notebook boto jupyterhub keras pandas tqdm mxnet six cloudpickle gensim nltk numpy scikit-learn xgboost xgbmagic luigi ipyparallel gym[atari] gym[board_game] gym[box2d] gym[classic_control] gym[doom]
+sudo /usr/local/bin/pip install airflow[all] jupyter notebook boto jupyterhub keras pandas tqdm mxnet six cloudpickle gensim nltk numpy scikit-learn xgboost xgbmagic luigi ipyparallel gym[atari] gym[board_game] gym[box2d] gym[classic_control] gym[doom]
 #sudo python -m nltk.downloader -d /usr/local/share/nltk_data all
 sudo npm install -g configurable-http-proxy
 ipcluster nbextension enable
@@ -57,8 +57,11 @@ sudo openssl req -new -key mykey.key -out csr.pem -subj "/C=US/ST=Denial/L=Sprin
 sudo openssl req -x509 -days 365 -key mykey.key -in csr.pem -out mycert.pem
 
 #sudo touch /etc/rc.d/rc.local
+airflow initdb
 sudo bash -c 'echo "#!/bin/bash" > /etc/rc.local'
 sudo bash -c 'echo "sudo jupyterhub --port 443 --ssl-key /tensorflow/mykey.key --ssl-cert /tensorflow/mycert.pem &" >> /etc/rc.local'
+sudo bash -c 'echo "airflow webserver -p 8080 &" >> /etc/rc.local'
+sudo bash -c 'echo "luigid &" >> /etc/rc.local'
 sudo bash -c 'echo "exit 0" >> /etc/rc.local'
 sudo chmod +x /etc/rc.local
 
