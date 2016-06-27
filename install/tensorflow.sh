@@ -47,7 +47,7 @@ pushd /tensorflow
 #bazel-bin/tensorflow/tools/pip_package/build_pip_package /tmp/tensorflow_pkg
 #sudo /usr/local/bin/pip install /tmp/tensorflow_pkg/tensorflow-0.8.0-py3-none-any.whl
 sudo /usr/local/bin/pip install https://storage.googleapis.com/tensorflow/linux/cpu/tensorflow-0.9.0rc0-cp34-cp34m-linux_x86_64.whl
-sudo /usr/local/bin/pip install airflow[s3] jupyter notebook boto jupyterhub keras pandas tqdm mxnet six cloudpickle gensim nltk numpy scikit-learn xgboost xgbmagic luigi ipyparallel
+sudo /usr/local/bin/pip install findspark deap airflow[s3] jupyter notebook boto jupyterhub keras pandas tqdm mxnet six cloudpickle gensim nltk numpy scikit-learn xgboost xgbmagic luigi ipyparallel
 #sudo python -m nltk.downloader -d /usr/local/share/nltk_data all
 sudo npm install -g configurable-http-proxy
 ipcluster nbextension enable
